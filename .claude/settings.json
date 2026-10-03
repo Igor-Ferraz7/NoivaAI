@@ -1,0 +1,29 @@
+{
+  "permissions": [
+    {
+      "tool": "bash",
+      "args": ["npm run lint", "npm test"],
+      "action": "allow"
+    },
+    {
+      "tool": "bash",
+      "action": "ask"
+    },
+    {
+      "tool": "read_file",
+      "path": ".env",
+      "action": "deny"
+    },
+    {
+      "tool": "read_file",
+      "path": "**/*.secret",
+      "action": "deny"
+    }
+  ],
+  "hooks": {
+    "PostToolUse": {
+      "Edit": ["bash -c 'npm run lint'"],
+      "Write": ["bash -c 'npm run lint'"]
+    }
+  }
+}

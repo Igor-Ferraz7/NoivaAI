@@ -4,6 +4,10 @@
       "Bash(npm run lint)",
       "Bash(npm test)"
     ],
+    "ask": [
+      "Bash(git push:*)",
+      "Bash(npm install:*)"
+    ],
     "deny": [
       "Read(./.env)",
       "Read(./.env.*)",

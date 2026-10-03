@@ -1,29 +1,30 @@
 {
-  "permissions": [
-    {
-      "tool": "bash",
-      "args": ["npm run lint", "npm test"],
-      "action": "allow"
-    },
-    {
-      "tool": "bash",
-      "action": "ask"
-    },
-    {
-      "tool": "read_file",
-      "path": ".env",
-      "action": "deny"
-    },
-    {
-      "tool": "read_file",
-      "path": "**/*.secret",
-      "action": "deny"
-    }
-  ],
+  "permissions": {
+    "allow": [
+      "Bash(npm run lint)",
+      "Bash(npm test)"
+    ],
+    "deny": [
+      "Read(./.env)",
+      "Read(./.env.*)",
+      "Read(./**/*.secret)",
+      "Bash(cat .env*)",
+      "Bash(type .env*)",
+      "Bash(more .env*)",
+      "Bash(Get-Content .env*)"
+    ]
+  },
   "hooks": {
-    "PostToolUse": {
-      "Edit": ["bash -c 'npm run lint'"],
-      "Write": ["bash -c 'npm run lint'"]
-    }
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "npm run lint"
+          }
+        ]
+      }
+    ]
   }
 }

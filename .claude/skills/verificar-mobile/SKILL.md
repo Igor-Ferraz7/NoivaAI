@@ -1,3 +1,8 @@
+---
+name: verificar-mobile
+description: Verificar Responsividade Mobile. Use sempre que criar ou editar um componente visual (botões, formulários, telas, layouts, ficheiros em src/components/) ou quando pedirem para verificar se algo fica bem no telemóvel, celular, mobile ou ecrãs pequenos.
+---
+
 # Skill: Verificar Responsividade Mobile (Noiva.AI)
 
 **Quando usar:** Usa esta skill sempre que criares ou editares um ficheiro na pasta `src/components/` ou sempre que a equipa pedir para "verificar se fica bem no telemóvel".

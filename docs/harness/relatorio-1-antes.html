@@ -1,0 +1,575 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="generator" content="better-harness codex-html">
+  <title>Harness Insights · NoivaAI-antes</title>
+  <style>
+    :root { color-scheme: dark; --bg:#111315; --panel:#1a1d20; --panel-2:#21252a; --line:#31363d; --text:#f5f7fa; --muted:#9aa3ad; --blue:#6cb8ff; --blue-2:#1b6ca8; --orange:#ff9a5a; --green:#53d69b; --red:#ff6b6b; }
+    * { box-sizing:border-box; }
+    html { background:var(--bg); scroll-behavior:smooth; }
+    .cjk-phrase { white-space:nowrap; }
+    body { margin:0; min-width:320px; font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; color:var(--text); background:radial-gradient(circle at 12% -10%,#22364a 0,transparent 34rem),var(--bg); line-height:1.55; }
+    .sr-only { position:absolute!important; width:1px!important; height:1px!important; padding:0!important; margin:-1px!important; overflow:hidden!important; clip:rect(0,0,0,0)!important; white-space:nowrap!important; border:0!important; }
+    body::before { content:""; position:fixed; inset:0; pointer-events:none; opacity:.22; background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px); background-size:28px 28px; }
+    main { position:relative; width:min(1180px,calc(100% - 40px)); margin:0 auto; padding:52px 0 88px; }
+    h1,h2,h3,p { margin-top:0; }
+    .eyebrow,.label { color:var(--blue); font-size:12px; font-weight:700; letter-spacing:.11em; text-transform:uppercase; }
+    .hero { display:grid; grid-template-columns:minmax(0,1fr) 190px; gap:36px; align-items:end; min-height:270px; padding:42px; border:1px solid var(--line); border-radius:28px; background:linear-gradient(135deg,rgba(36,43,51,.96),rgba(21,24,27,.94)); box-shadow:0 28px 70px rgba(0,0,0,.28); }
+    .hero h1 { margin:12px 0 10px; font-size:clamp(42px,7vw,82px); line-height:.96; letter-spacing:-.055em; }
+    .hero p { max-width:760px; margin-bottom:22px; color:#c9d0d8; font-size:18px; }
+    .hero-tags { display:flex; flex-wrap:wrap; gap:8px; }
+    .score-orbit { width:174px; aspect-ratio:1; display:grid; place-content:center; text-align:center; border:14px solid #343a41; border-top-color:var(--blue); border-right-color:var(--blue-2); border-radius:50%; background:#1a2026; box-shadow:inset 0 0 0 1px var(--line); }
+    .score-orbit strong { font-size:44px; line-height:1; }
+    .score-orbit > span { width:110px; margin-top:7px; color:var(--muted); font-size:12px; }
+    .pill { display:inline-flex; align-items:center; min-height:26px; padding:3px 10px; border-radius:999px; color:#d4dae0; background:#30353b; font-size:12px; font-weight:700; }
+    .pill.accent { color:#c9e8ff; background:#164e75; }.pill.good { color:#c9f9e5; background:#165c43; }.pill.warning { color:#ffe1c8; background:#754322; }.pill.danger { color:#ffd4d4; background:#762e31; }.pill.muted,.pill.neutral { color:#c8cdd3; background:#34383d; }
+    .metrics { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin:18px 0 54px; }
+    .metric { min-height:126px; padding:22px 24px; border:1px solid var(--line); border-radius:20px; background:rgba(30,34,38,.9); }
+    .metric > span,.metric > small { display:block; color:var(--muted); }.metric > strong { display:block; margin:5px 0 2px; font-size:34px; line-height:1.1; }.metric > small { font-size:12px; }
+    .section { margin-top:64px; scroll-margin-top:24px; }.section-heading { display:flex; justify-content:space-between; gap:30px; align-items:end; margin-bottom:20px; }.section-heading h2 { margin:5px 0 0; font-size:30px; letter-spacing:-.025em; }.section-heading > p { max-width:420px; margin:0; color:var(--muted); text-align:right; font-size:14px; }
+    .dimension-grid { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:12px; }.dimension-card { min-height:230px; padding:19px; border:1px solid var(--line); border-radius:19px; background:linear-gradient(180deg,var(--panel-2),var(--panel)); }.dimension-top { display:flex; min-height:52px; justify-content:space-between; gap:8px; align-items:flex-start; font-weight:700; }.score-line { display:flex; align-items:baseline; gap:4px; margin-top:14px; }.score-line strong { font-size:34px; }.score-line span { color:var(--muted); font-size:12px; }.track { height:8px; margin:8px 0 16px; overflow:hidden; border-radius:999px; background:#30353a; }.track i { display:block; height:100%; border-radius:inherit; background:linear-gradient(90deg,var(--blue-2),var(--blue)); }.dimension-card p { margin:0; color:var(--muted); font-size:13px; }
+    .activity-layout { display:grid; grid-template-columns:minmax(0,1.8fr) minmax(230px,.7fr); gap:14px; }.activity-panel,.subpanel,.finding,.custom-grid article,.evidence-grid,.evidence-note { border:1px solid var(--line); border-radius:19px; background:var(--panel); }.activity-panel { display:flex; min-width:0; flex-direction:column; justify-content:center; padding:22px; overflow:hidden; }.heat-scroll { width:100%; min-width:0; overflow-x:auto; padding-bottom:8px; }.heatmap,.heat-axis { display:grid; grid-template-columns:repeat(var(--heat-days),minmax(13px,1fr)); column-gap:4px; min-width:var(--heat-min-width); }.heatmap { align-items:center; }.heat-cell { width:13px; height:13px; justify-self:center; border-radius:3px; background:#2b3035; }.heat-cell.l1{background:#174d70}.heat-cell.l2{background:#206f9e}.heat-cell.l3{background:#319bd1}.heat-cell.l4{background:#70c9ff}.heat-axis { margin-top:10px; color:var(--muted); font-size:10px; }.heat-tick { justify-self:center; white-space:nowrap; }.heat-tick.first { justify-self:start; }.heat-tick.last { justify-self:end; }.heatmap-empty { color:var(--muted); }.stacked-metrics { display:grid; gap:14px; }.stacked-metrics .metric { min-height:0; }
+    .long-session-review { margin-top:14px; padding:22px; border:1px solid var(--line); border-radius:19px; background:linear-gradient(180deg,#201f1d,var(--panel)); }.long-session-heading { display:flex; justify-content:space-between; gap:24px; align-items:end; }.long-session-heading h3 { margin:4px 0 0; font-size:20px; }.long-session-heading > p { max-width:520px; margin:0; color:var(--muted); text-align:right; font-size:12px; }.long-session-list { display:grid; gap:12px; margin-top:18px; }.long-session-card { min-width:0; padding:17px; overflow:hidden; border:1px solid var(--line); border-radius:16px; background:#181b1e; }.long-session-meta { display:flex; justify-content:space-between; gap:16px; align-items:center; color:var(--muted); font-size:12px; }.long-session-tags { min-width:0; display:flex; flex-wrap:wrap; gap:8px; align-items:center; }.long-session-tags strong { color:var(--text); font-size:15px; }.long-session-request,.long-session-locator { display:grid; grid-template-columns:72px minmax(0,1fr); gap:10px; margin:12px 0 0; color:#d2d8df; overflow-wrap:anywhere; font-size:13px; }.long-session-request > span,.long-session-locator > span { color:var(--muted); font-size:11px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; }.long-session-locator code { min-width:0; overflow:hidden; color:#bfe3ff; text-overflow:ellipsis; white-space:nowrap; }.tool-trace-details { margin-top:14px; border-top:1px solid var(--line); }.tool-trace-details summary { display:flex; justify-content:space-between; gap:16px; align-items:center; padding:13px 2px 0; color:#dce5ed; cursor:pointer; font-size:13px; font-weight:700; }.tool-trace-details summary small { color:var(--muted); font-weight:400; text-align:right; }.tool-trace-details summary:focus-visible,.tool-trace-scroll:focus-visible { outline:2px solid var(--blue); outline-offset:3px; }.tool-trace-body { padding-top:12px; }.tool-trace-scroll { width:100%; max-width:100%; overflow-x:auto; padding-bottom:8px; overscroll-behavior-inline:contain; }.tool-trace-svg { display:block; max-width:none; color:#d6dde5; overflow:visible; }.tool-trace-row-alt { fill:currentColor; opacity:.035; }.tool-trace-lane-line { stroke:currentColor; stroke-dasharray:3 5; opacity:.22; }.tool-trace-grid-line { stroke:currentColor; opacity:.12; }.tool-trace-axis-line { stroke:currentColor; opacity:.25; }.tool-trace-lane-label,.tool-trace-tick,.tool-trace-axis-label { fill:currentColor; font-size:11px; opacity:.68; }.tool-trace-axis-label { font-weight:700; }.tool-trace-point { fill:#64748b; stroke:currentColor; stroke-width:1; }.tool-trace-point.failed { fill:var(--orange); }.tool-trace-point:focus { outline:none; stroke:var(--blue); stroke-width:3; }.tool-trace-body > p,.long-session-boundary { margin:4px 0 0; color:var(--muted); font-size:12px; }.tool-trace-empty { min-width:680px; margin:0; padding:24px; border:1px dashed var(--line); border-radius:12px; }.long-session-boundary { margin-top:14px; }
+    .two-column { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:14px; }.subpanel { padding:22px; }.subpanel h3 { font-size:15px; }.usage-list { display:grid; gap:12px; }.usage-row { display:grid; grid-template-columns:minmax(100px,.75fr) 1fr 52px; gap:12px; align-items:center; font-size:12px; }.usage-row > span { white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }.usage-row i { height:7px; overflow:hidden; border-radius:999px; background:#30353a; }.usage-row b { display:block; height:100%; background:linear-gradient(90deg,var(--blue-2),var(--blue)); }.usage-row strong { text-align:right; }
+    .finding-list { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; }.finding-card { min-width:0; min-height:220px; display:flex; flex-direction:column; padding:18px; border:1px solid var(--line); border-radius:19px; background:linear-gradient(180deg,#1c2329,var(--panel)); }.finding-card-main { display:grid; gap:10px; }.finding-meta { display:flex; flex-wrap:wrap; gap:7px; }.finding-card h3 { min-height:2.8em; margin:0; display:-webkit-box; overflow:hidden; font-size:17px; line-height:1.4; -webkit-box-orient:vertical; -webkit-line-clamp:2; }.finding-preview { margin:0; color:#c7ced6; display:-webkit-box; overflow:hidden; font-size:13px; line-height:1.55; -webkit-box-orient:vertical; -webkit-line-clamp:2; }.finding-actions,.dialog-actions { display:flex; flex-wrap:wrap; justify-content:space-between; gap:10px; margin-top:auto; padding-top:16px; }.action-button { min-height:38px; padding:8px 13px; border:1px solid transparent; border-radius:10px; color:var(--text); background:#30363d; font:inherit; font-size:13px; font-weight:700; cursor:pointer; }.action-button:hover { filter:brightness(1.12); }.action-button:focus-visible { outline:2px solid var(--blue); outline-offset:2px; }.action-button.secondary { color:#cceaff; border-color:#286d9b; background:#164e75; }.action-button.ghost { color:#d4dae0; border-color:var(--line); background:transparent; }.finding-dialog,.manual-copy-dialog { width:min(880px,calc(100vw - 32px)); max-height:calc(100vh - 32px); overflow:auto; padding:24px; border:1px solid var(--line); border-radius:20px; color:var(--text); background:var(--panel); box-shadow:0 30px 90px rgba(0,0,0,.55); }.finding-dialog::backdrop,.manual-copy-dialog::backdrop { background:rgba(4,8,12,.72); }.dialog-heading { display:flex; justify-content:space-between; gap:18px; align-items:flex-start; }.dialog-heading h3 { margin:6px 0 0; font-size:24px; }.dialog-section { margin-top:18px; }.dialog-section p { margin:7px 0 0; color:#d1d7de; }.dialog-section ol,.dialog-section ul { margin:8px 0 0; padding-left:22px; color:#d1d7de; }.manual-copy-dialog textarea { width:100%; min-height:260px; margin-top:14px; padding:14px; resize:vertical; border:1px solid var(--line); border-radius:12px; color:var(--text); background:#11161b; font:13px/1.5 ui-monospace,SFMono-Regular,Consolas,monospace; }.no-js .finding-actions,.no-js .manual-copy-dialog { display:none!important; }.no-js .finding-dialog:not([open]) { display:block; position:static; width:auto; max-height:none; margin-top:16px; box-shadow:none; }
+    .suggestion-block { margin-top:28px; padding-top:24px; border-top:1px solid var(--line); }.suggestion-heading { display:flex; justify-content:space-between; gap:20px; align-items:end; margin-bottom:14px; }.suggestion-heading h3 { margin:4px 0 0; font-size:20px; }.suggestion-heading p { margin:0; color:var(--muted); font-size:12px; }.suggestion-list { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:12px; }.suggestion { padding:18px; border:1px solid var(--line); border-radius:17px; background:linear-gradient(180deg,#1b252d,var(--panel)); }.suggestion-top { display:flex; justify-content:space-between; gap:8px; }.suggestion h3 { margin:13px 0 7px; font-size:16px; }.suggestion > p { color:#c7ced6; font-size:13px; }.suggestion dl { display:grid; gap:9px; margin:14px 0 0; }.suggestion dl div { display:grid; gap:2px; }.suggestion dt { color:var(--muted); font-size:11px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; }.suggestion dd { margin:0; color:#d7dde4; font-size:12px; }
+    .custom-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:12px; }.custom-grid article { display:flex; gap:14px; align-items:center; padding:18px; }.custom-grid h3 { margin:0; font-size:15px; }.custom-grid p { margin:3px 0 0; color:var(--muted); font-size:12px; }.custom-mark { display:grid; flex:0 0 38px; aspect-ratio:1; place-content:center; border-radius:12px; color:#d9efff; background:#164e75; font-weight:800; }
+    .evidence-grid { display:grid; grid-template-columns:repeat(3,1fr); overflow:hidden; }.evidence-grid div { padding:20px; border-right:1px solid var(--line); border-bottom:1px solid var(--line); }.evidence-grid > div > span,.evidence-grid > div > strong { display:block; }.evidence-grid > div > span { color:var(--muted); font-size:12px; }.evidence-grid > div > strong { margin-top:4px; }.evidence-note { margin-top:14px; padding:20px; }.method-note,.empty { color:var(--muted); }.method-note { max-width:800px; margin:18px 0 0; font-size:13px; }
+    footer { margin-top:64px; padding-top:20px; border-top:1px solid var(--line); color:var(--muted); font-size:12px; }
+    @media (max-width:1000px) { .finding-list{grid-template-columns:repeat(2,minmax(0,1fr))} }
+    @media (max-width:900px) { .metrics,.dimension-grid{grid-template-columns:repeat(2,1fr)}.activity-layout,.two-column{grid-template-columns:1fr}.evidence-grid{grid-template-columns:repeat(2,1fr)} }
+    @media (max-width:680px) { .finding-list{grid-template-columns:1fr}.finding-card{min-height:0} }
+    @media (max-width:620px) { main{width:min(100% - 24px,1180px);padding-top:18px}.hero{grid-template-columns:1fr;min-height:0;padding:25px;border-radius:22px}.hero h1{font-size:44px}.hero p{font-size:15px}.score-orbit{width:126px}.score-orbit strong{font-size:34px}.metrics{grid-template-columns:1fr;margin-bottom:42px}.metric{min-height:0}.section{margin-top:46px}.section-heading,.suggestion-heading,.long-session-heading{display:block}.section-heading > p,.suggestion-heading > p,.long-session-heading > p{text-align:left;margin-top:8px}.dimension-grid{grid-template-columns:1fr}.dimension-card{min-height:0}.evidence-grid{grid-template-columns:1fr}.usage-row{grid-template-columns:minmax(92px,.7fr) 1fr 44px}.long-session-review{padding:15px}.long-session-meta,.tool-trace-details summary{align-items:flex-start;flex-direction:column}.long-session-request,.long-session-locator{grid-template-columns:1fr;gap:3px}.finding-dialog{padding:18px}.dialog-heading{display:grid} }
+    @media print { :root{color-scheme:light;--bg:#fff;--panel:#fff;--panel-2:#f6f8fa;--line:#d8dee4;--text:#111;--muted:#59636e}body{background:#fff}body::before{display:none}.hero{box-shadow:none}.section{break-inside:avoid}.finding-list{display:block}.finding-card,.long-session-card{margin-bottom:16px;break-inside:avoid}.finding-actions,.dialog-actions,.manual-copy-dialog{display:none!important}.finding-dialog:not([open]),details.tool-trace-details:not([open]) > :not(summary){display:block!important;position:static;width:auto;max-height:none;margin-top:16px;box-shadow:none}.tool-trace-scroll{overflow:visible}.tool-trace-svg{width:100%;height:auto} }
+  </style>
+</head>
+<body>
+<div id="copy-status" class="sr-only" role="status" aria-live="polite"></div>
+<main id="harness-report" data-report-mode="codex-html">
+<header class="hero" data-section="overview">
+    <div class="hero-copy">
+      <span class="eyebrow">Harness Insights · Portable HTML</span>
+      <h1>NoivaAI-antes</h1>
+      <p>Spec 001 is concrete and testable, but the Claude Code controls are written in a shape Claude Code does not recognize: the secret-file protections and post-edit lint are likely inactive, and AGENTS.md rules are not auto-loaded. No product-development session was observed, so the real effect of the rules, Skill, and Hook remains unobserved.</p>
+      <div class="hero-tags"><span class="pill accent">agent-work-loop-v4</span><span class="pill muted">Evidence-bound</span></div>
+    </div>
+    <div class="score-orbit"><strong>5</strong><span>reviewed dimensions</span></div>
+  </header>
+  <div class="metrics">
+    <div class="metric">
+    <span>Loop Effectiveness</span>
+    <strong>37 / 100</strong>
+    <small>Changes after later task outcomes</small>
+  </div>
+    <div class="metric">
+    <span>Asset Health / Repair Progress</span>
+    <strong>0 / 100</strong>
+    <small>0 verified · 0 partial · 6 pending</small>
+  </div>
+    <div class="metric">
+    <span>Sessions analyzed</span>
+    <strong>N/A</strong>
+    
+  </div>
+    <div class="metric">
+    <span>Findings</span>
+    <strong>6</strong>
+    <small>1 High · 3 Medium</small>
+  </div>
+  </div>
+  <section class="section" data-section="fluency" aria-labelledby="section-fluency">
+    <div class="section-heading">
+      <div><span class="eyebrow">01 · Readiness</span><h2 id="section-fluency">Five-dimension fluency</h2></div>
+      <p>Scores and states come from the reviewed source.</p>
+    </div>
+    <div class="dimension-grid">
+    <article class="dimension-card" data-dimension-id="task-understanding">
+        <div class="dimension-top"><span>Task Understanding</span><span class="pill muted">Reviewed</span></div>
+        <div class="score-line"><strong>55</strong><span>/ 100</span></div>
+        <div class="track" role="progressbar" aria-label="Task Understanding 55 of 100" aria-valuemin="0" aria-valuemax="100" aria-valuenow="55"><i style="width:55%"></i></div>
+        <p>Spec 001 has clear rules, examples, and acceptance criteria, but CLAUDE.md only points to AGENTS.md in prose, so stack, commands, and the read-specs-first rule depend on the agent choosing to open it.</p>
+      </article>
+<article class="dimension-card" data-dimension-id="controlled-execution">
+        <div class="dimension-top"><span>Controlled Execution</span><span class="pill muted">Reviewed</span></div>
+        <div class="score-line"><strong>30</strong><span>/ 100</span></div>
+        <div class="track" role="progressbar" aria-label="Controlled Execution 30 of 100" aria-valuemin="0" aria-valuemax="100" aria-valuenow="30"><i style="width:30%"></i></div>
+        <p>Permission rules do not follow the Claude Code schema, so the .env and *.secret read denies are likely unenforced; the documented npm commands cannot run without a package.json.</p>
+      </article>
+<article class="dimension-card" data-dimension-id="change-validation">
+        <div class="dimension-top"><span>Change Validation</span><span class="pill muted">Reviewed</span></div>
+        <div class="score-line"><strong>25</strong><span>/ 100</span></div>
+        <div class="track" role="progressbar" aria-label="Change Validation 25 of 100" aria-valuemin="0" aria-valuemax="100" aria-valuenow="25"><i style="width:25%"></i></div>
+        <p>No runnable check exists: no tests or lint config, the post-edit lint Hook is malformed, and the one observed change closed without a check.</p>
+      </article>
+<article class="dimension-card" data-dimension-id="reliable-delivery">
+        <div class="dimension-top"><span>Reliable Delivery</span><span class="pill muted">Reviewed</span></div>
+        <div class="score-line"><strong>40</strong><span>/ 100</span></div>
+        <div class="track" role="progressbar" aria-label="Reliable Delivery 40 of 100" aria-valuemin="0" aria-valuemax="100" aria-valuenow="40"><i style="width:40%"></i></div>
+        <p>No acceptance boundary (PR, CI, review) or high-risk action was observed; recovery is plain git and acceptance remains unobserved.</p>
+      </article>
+<article class="dimension-card" data-dimension-id="learning-capture">
+        <div class="dimension-top"><span>Learning Capture</span><span class="pill muted">Reviewed</span></div>
+        <div class="score-line"><strong>35</strong><span>/ 100</span></div>
+        <div class="track" role="progressbar" aria-label="Learning Capture 35 of 100" aria-valuemin="0" aria-valuemax="100" aria-valuenow="35"><i style="width:35%"></i></div>
+        <p>All three sessions in the window were tooling setup, none product work, so there is no comparable repeated work and no evidence the Skill or rules were used.</p>
+      </article>
+  </div>
+  </section>
+  
+  <section class="section" data-section="findings" aria-labelledby="section-findings">
+    <div class="section-heading">
+      <div><span class="eyebrow">03 · Action</span><h2 id="section-findings">Findings and recommendations</h2></div>
+      <p>6 findings · 0 suggestions</p>
+    </div>
+    <div class="finding-list"><article class="finding-card" data-finding-id="settings-permissions-schema">
+      <div class="finding-card-main">
+        <div class="finding-meta">
+          <span class="pill danger">High</span>
+          <span class="pill neutral">Controlled Execution</span>
+        </div>
+        <h3>Reads of .env and *.secret are likely not blocked</h3>
+        <p class="finding-preview">Fact: in .claude/settings.json, &#39;permissions&#39; is a list of {tool, args, path, action} objects with tool names like &#39;bash&#39; and &#39;read_file&#39;; Claude Code expects an object of allow/ask/deny rule strings such as Read(./.env). Inference: the repository&#39;s only secret protections, and the lint/test allowlist, exist on paper only. Owner: .claude/settings.json (project). Uncertainty: established by reading the file; how Claude Code handles it at runtime was not observed. Provider: claude.</p>
+      </div>
+      <div class="finding-actions">
+        <button type="button" class="action-button secondary" data-copy-finding="settings-permissions-schema" aria-label="Copy AI Fix: Reads of .env and *.secret are likely not blocked">Copy AI Fix</button>
+        <button type="button" class="action-button ghost" data-view-finding-dialog="finding-dialog-1" aria-label="View details: Reads of .env and *.secret are likely not blocked">View details</button>
+      </div>
+      <dialog class="finding-dialog" id="finding-dialog-1" data-finding-dialog-id="settings-permissions-schema" aria-labelledby="finding-dialog-1-title">
+        <div class="dialog-heading">
+          <div><span class="label">Finding details</span><h3 id="finding-dialog-1-title">Reads of .env and *.secret are likely not blocked</h3></div>
+          <span class="pill danger">High</span>
+        </div>
+        <div class="dialog-section"><span class="label">Cause</span><p>Fact: in .claude/settings.json, &#39;permissions&#39; is a list of {tool, args, path, action} objects with tool names like &#39;bash&#39; and &#39;read_file&#39;; Claude Code expects an object of allow/ask/deny rule strings such as Read(./.env). Inference: the repository&#39;s only secret protections, and the lint/test allowlist, exist on paper only. Owner: .claude/settings.json (project). Uncertainty: established by reading the file; how Claude Code handles it at runtime was not observed. Provider: claude.</p></div>
+        <div class="dialog-section"><span class="label">Expected Output</span><ol><li>Project permissions in the allow/deny shape Claude Code recognizes, with the .env and *.secret read denies visible in /permissions.</li></ol></div>
+        <div class="dialog-section"><span class="label">Acceptance Checks</span><ul><li>Open /permissions in Claude Code and confirm the deny and allow rules appear as project rules</li><li>Confirm /doctor reports no validation errors for .claude/settings.json</li></ul></div>
+        <div class="dialog-actions">
+          <button type="button" class="action-button secondary" data-copy-finding="settings-permissions-schema" aria-label="Copy AI Fix: Reads of .env and *.secret are likely not blocked">Copy AI Fix</button>
+          <button type="button" class="action-button ghost" data-close-finding-dialog="finding-dialog-1">Close</button>
+        </div>
+      </dialog>
+    </article>
+<article class="finding-card" data-finding-id="settings-hook-schema">
+      <div class="finding-card-main">
+        <div class="finding-meta">
+          <span class="pill warning">Medium</span>
+          <span class="pill neutral">Change Validation</span>
+        </div>
+        <h3>The configured post-edit lint never runs after Edit or Write</h3>
+        <p class="finding-preview">Fact: hooks.PostToolUse is written as an object keyed by tool (&#39;Edit&#39;, &#39;Write&#39;) with string arrays; Claude Code expects a list of {matcher, hooks:[{type:&#39;command&#39;, command}]}, and the asset lint reads the block as a match-all matcher. Inference: the intended automatic lint feedback does not exist, and if fixed as written it would fail on every edit because there is no package.json. Owner: .claude/settings.json. Uncertainty: runtime handling was not observed.</p>
+      </div>
+      <div class="finding-actions">
+        <button type="button" class="action-button secondary" data-copy-finding="settings-hook-schema" aria-label="Copy AI Fix: The configured post-edit lint never runs after Edit or Write">Copy AI Fix</button>
+        <button type="button" class="action-button ghost" data-view-finding-dialog="finding-dialog-2" aria-label="View details: The configured post-edit lint never runs after Edit or Write">View details</button>
+      </div>
+      <dialog class="finding-dialog" id="finding-dialog-2" data-finding-dialog-id="settings-hook-schema" aria-labelledby="finding-dialog-2-title">
+        <div class="dialog-heading">
+          <div><span class="label">Finding details</span><h3 id="finding-dialog-2-title">The configured post-edit lint never runs after Edit or Write</h3></div>
+          <span class="pill warning">Medium</span>
+        </div>
+        <div class="dialog-section"><span class="label">Cause</span><p>Fact: hooks.PostToolUse is written as an object keyed by tool (&#39;Edit&#39;, &#39;Write&#39;) with string arrays; Claude Code expects a list of {matcher, hooks:[{type:&#39;command&#39;, command}]}, and the asset lint reads the block as a match-all matcher. Inference: the intended automatic lint feedback does not exist, and if fixed as written it would fail on every edit because there is no package.json. Owner: .claude/settings.json. Uncertainty: runtime handling was not observed.</p></div>
+        <div class="dialog-section"><span class="label">Expected Output</span><ol><li>A recognized PostToolUse hook scoped to Edit|Write that does not fail while the project has no package.json.</li></ol></div>
+        <div class="dialog-section"><span class="label">Acceptance Checks</span><ul><li>Open /hooks in Claude Code and confirm a PostToolUse entry with matcher Edit|Write is listed</li><li>Edit a scratch file and confirm the hook runs without blocking the session</li></ul></div>
+        <div class="dialog-actions">
+          <button type="button" class="action-button secondary" data-copy-finding="settings-hook-schema" aria-label="Copy AI Fix: The configured post-edit lint never runs after Edit or Write">Copy AI Fix</button>
+          <button type="button" class="action-button ghost" data-close-finding-dialog="finding-dialog-2">Close</button>
+        </div>
+      </dialog>
+    </article>
+<article class="finding-card" data-finding-id="claude-md-agents-import">
+      <div class="finding-card-main">
+        <div class="finding-meta">
+          <span class="pill warning">Medium</span>
+          <span class="pill neutral">Task Understanding</span>
+        </div>
+        <h3>AGENTS.md rules are not auto-loaded into Claude Code sessions</h3>
+        <p class="finding-preview">Fact: CLAUDE.md says to import and follow AGENTS.md in prose, without an @AGENTS.md import; in this review session the loaded project context contained only CLAUDE.md. Inference: stack, commands, folders, and the read-specs-first and always-test principles reach the agent only if it chooses to open the file. Owner: CLAUDE.md. Uncertainty: effect on real product tasks was not observed.</p>
+      </div>
+      <div class="finding-actions">
+        <button type="button" class="action-button secondary" data-copy-finding="claude-md-agents-import" aria-label="Copy AI Fix: AGENTS.md rules are not auto-loaded into Claude Code sessions">Copy AI Fix</button>
+        <button type="button" class="action-button ghost" data-view-finding-dialog="finding-dialog-3" aria-label="View details: AGENTS.md rules are not auto-loaded into Claude Code sessions">View details</button>
+      </div>
+      <dialog class="finding-dialog" id="finding-dialog-3" data-finding-dialog-id="claude-md-agents-import" aria-labelledby="finding-dialog-3-title">
+        <div class="dialog-heading">
+          <div><span class="label">Finding details</span><h3 id="finding-dialog-3-title">AGENTS.md rules are not auto-loaded into Claude Code sessions</h3></div>
+          <span class="pill warning">Medium</span>
+        </div>
+        <div class="dialog-section"><span class="label">Cause</span><p>Fact: CLAUDE.md says to import and follow AGENTS.md in prose, without an @AGENTS.md import; in this review session the loaded project context contained only CLAUDE.md. Inference: stack, commands, folders, and the read-specs-first and always-test principles reach the agent only if it chooses to open the file. Owner: CLAUDE.md. Uncertainty: effect on real product tasks was not observed.</p></div>
+        <div class="dialog-section"><span class="label">Expected Output</span><ol><li>A CLAUDE.md that loads AGENTS.md through @AGENTS.md while keeping the role and mobile-first rules.</li></ol></div>
+        <div class="dialog-section"><span class="label">Acceptance Checks</span><ul><li>Start a new session and run /memory to confirm AGENTS.md is listed as loaded</li><li>Without opening files, ask the agent for the lint command and confirm it answers npm run lint</li></ul></div>
+        <div class="dialog-actions">
+          <button type="button" class="action-button secondary" data-copy-finding="claude-md-agents-import" aria-label="Copy AI Fix: AGENTS.md rules are not auto-loaded into Claude Code sessions">Copy AI Fix</button>
+          <button type="button" class="action-button ghost" data-close-finding-dialog="finding-dialog-3">Close</button>
+        </div>
+      </dialog>
+    </article>
+<article class="finding-card" data-finding-id="agents-md-unrunnable-commands">
+      <div class="finding-card-main">
+        <div class="finding-meta">
+          <span class="pill warning">Medium</span>
+          <span class="pill neutral">Controlled Execution</span>
+        </div>
+        <h3>The always-test-before-done rule cannot be satisfied in the current repo</h3>
+        <p class="finding-preview">Fact: AGENTS.md declares npm install, npm run dev, npm test, and npm run lint, and forbids claiming completion without running npm test or npm run lint; no package.json, src/, tests, or lint config exist, and the one observed change in the window closed without a check. Inference: an agent following the rule either fails or declares done without real verification, and the &#39;or&#39; lets lint alone count as proof. Owner: AGENTS.md. Uncertainty: the repo is intentionally spec-only; the defect is the instruction contradicting the current state, not missing code.</p>
+      </div>
+      <div class="finding-actions">
+        <button type="button" class="action-button secondary" data-copy-finding="agents-md-unrunnable-commands" aria-label="Copy AI Fix: The always-test-before-done rule cannot be satisfied in the current repo">Copy AI Fix</button>
+        <button type="button" class="action-button ghost" data-view-finding-dialog="finding-dialog-4" aria-label="View details: The always-test-before-done rule cannot be satisfied in the current repo">View details</button>
+      </div>
+      <dialog class="finding-dialog" id="finding-dialog-4" data-finding-dialog-id="agents-md-unrunnable-commands" aria-labelledby="finding-dialog-4-title">
+        <div class="dialog-heading">
+          <div><span class="label">Finding details</span><h3 id="finding-dialog-4-title">The always-test-before-done rule cannot be satisfied in the current repo</h3></div>
+          <span class="pill warning">Medium</span>
+        </div>
+        <div class="dialog-section"><span class="label">Cause</span><p>Fact: AGENTS.md declares npm install, npm run dev, npm test, and npm run lint, and forbids claiming completion without running npm test or npm run lint; no package.json, src/, tests, or lint config exist, and the one observed change in the window closed without a check. Inference: an agent following the rule either fails or declares done without real verification, and the &#39;or&#39; lets lint alone count as proof. Owner: AGENTS.md. Uncertainty: the repo is intentionally spec-only; the defect is the instruction contradicting the current state, not missing code.</p></div>
+        <div class="dialog-section"><span class="label">Expected Output</span><ol><li>AGENTS.md commands and completion rule consistent with both the current repo state and the post-scaffold state.</li></ol></div>
+        <div class="dialog-section"><span class="label">Acceptance Checks</span><ul><li>Read AGENTS.md and confirm every referenced command exists or is clearly marked as future</li><li>Confirm the completion rule requires both lint and tests</li></ul></div>
+        <div class="dialog-actions">
+          <button type="button" class="action-button secondary" data-copy-finding="agents-md-unrunnable-commands" aria-label="Copy AI Fix: The always-test-before-done rule cannot be satisfied in the current repo">Copy AI Fix</button>
+          <button type="button" class="action-button ghost" data-close-finding-dialog="finding-dialog-4">Close</button>
+        </div>
+      </dialog>
+    </article>
+<article class="finding-card" data-finding-id="mobile-skill-routing">
+      <div class="finding-card-main">
+        <div class="finding-meta">
+          <span class="pill neutral">Low</span>
+          <span class="pill neutral">Controlled Execution</span>
+        </div>
+        <h3>The spec-required mobile-first check is unlikely to be triggered</h3>
+        <p class="finding-preview">Fact: Spec 001 section 8 makes mobile-first mandatory and CLAUDE.md asks for the check whenever a visual component changes; the verificar-mobile Skill has no frontmatter name or description, so Claude Code lists only its heading and the &#39;Quando usar&#39; triggers stay in the body; CLAUDE.md does not name the Skill; step 3 rewrites the component before asking the team, against the small-steps rule. Inference: the check depends on the agent remembering it. Uncertainty: no components exist yet and actual triggering was not observed.</p>
+      </div>
+      <div class="finding-actions">
+        <button type="button" class="action-button secondary" data-copy-finding="mobile-skill-routing" aria-label="Copy AI Fix: The spec-required mobile-first check is unlikely to be triggered">Copy AI Fix</button>
+        <button type="button" class="action-button ghost" data-view-finding-dialog="finding-dialog-5" aria-label="View details: The spec-required mobile-first check is unlikely to be triggered">View details</button>
+      </div>
+      <dialog class="finding-dialog" id="finding-dialog-5" data-finding-dialog-id="mobile-skill-routing" aria-labelledby="finding-dialog-5-title">
+        <div class="dialog-heading">
+          <div><span class="label">Finding details</span><h3 id="finding-dialog-5-title">The spec-required mobile-first check is unlikely to be triggered</h3></div>
+          <span class="pill neutral">Low</span>
+        </div>
+        <div class="dialog-section"><span class="label">Cause</span><p>Fact: Spec 001 section 8 makes mobile-first mandatory and CLAUDE.md asks for the check whenever a visual component changes; the verificar-mobile Skill has no frontmatter name or description, so Claude Code lists only its heading and the &#39;Quando usar&#39; triggers stay in the body; CLAUDE.md does not name the Skill; step 3 rewrites the component before asking the team, against the small-steps rule. Inference: the check depends on the agent remembering it. Uncertainty: no components exist yet and actual triggering was not observed.</p></div>
+        <div class="dialog-section"><span class="label">Expected Output</span><ol><li>A Skill with frontmatter name and description, a confirm-first rewrite step, and an explicit CLAUDE.md reference.</li></ol></div>
+        <div class="dialog-section"><span class="label">Acceptance Checks</span><ul><li>Start a new session and confirm the Skill list shows the new description</li><li>Ask to check whether a component looks good on a phone and confirm the Skill is selected</li></ul></div>
+        <div class="dialog-actions">
+          <button type="button" class="action-button secondary" data-copy-finding="mobile-skill-routing" aria-label="Copy AI Fix: The spec-required mobile-first check is unlikely to be triggered">Copy AI Fix</button>
+          <button type="button" class="action-button ghost" data-close-finding-dialog="finding-dialog-5">Close</button>
+        </div>
+      </dialog>
+    </article>
+<article class="finding-card" data-finding-id="no-product-session-evidence">
+      <div class="finding-card-main">
+        <div class="finding-meta">
+          <span class="pill neutral">Low</span>
+          <span class="pill neutral">Learning Capture</span>
+        </div>
+        <h3>It is not yet possible to tell whether the rules, Skill, and Hook help real work</h3>
+        <p class="finding-preview">Fact: the 3 eligible sessions in the 30-day window (5 Task Episodes, 4 distinct requests) were Claude Code and tooling setup with no Noiva.AI product task, no checks, and no comparable repeated Episodes. Inference: the observation boundary blocks a repeated-work or clean-window decision. Owner: the next review cycle. Uncertainty: this is an evidence gap, not a project defect.</p>
+      </div>
+      <div class="finding-actions">
+        <button type="button" class="action-button secondary" data-copy-finding="no-product-session-evidence" aria-label="Copy AI Fix: It is not yet possible to tell whether the rules, Skill, and Hook help real work">Copy AI Fix</button>
+        <button type="button" class="action-button ghost" data-view-finding-dialog="finding-dialog-6" aria-label="View details: It is not yet possible to tell whether the rules, Skill, and Hook help real work">View details</button>
+      </div>
+      <dialog class="finding-dialog" id="finding-dialog-6" data-finding-dialog-id="no-product-session-evidence" aria-labelledby="finding-dialog-6-title">
+        <div class="dialog-heading">
+          <div><span class="label">Finding details</span><h3 id="finding-dialog-6-title">It is not yet possible to tell whether the rules, Skill, and Hook help real work</h3></div>
+          <span class="pill neutral">Low</span>
+        </div>
+        <div class="dialog-section"><span class="label">Cause</span><p>Fact: the 3 eligible sessions in the 30-day window (5 Task Episodes, 4 distinct requests) were Claude Code and tooling setup with no Noiva.AI product task, no checks, and no comparable repeated Episodes. Inference: the observation boundary blocks a repeated-work or clean-window decision. Owner: the next review cycle. Uncertainty: this is an evidence gap, not a project defect.</p></div>
+        <div class="dialog-section"><span class="label">Expected Output</span><ol><li>A review window with real product Task Episodes that allows judging the use and effect of the rules, Skill, and Hook.</li></ol></div>
+        <div class="dialog-section"><span class="label">Acceptance Checks</span><ul><li>Confirm the new review finds at least two product-development Task Episodes</li><li>Confirm whether the verificar-mobile Skill and the Hook appear as used in those Episodes</li></ul></div>
+        <div class="dialog-actions">
+          <button type="button" class="action-button secondary" data-copy-finding="no-product-session-evidence" aria-label="Copy AI Fix: It is not yet possible to tell whether the rules, Skill, and Hook help real work">Copy AI Fix</button>
+          <button type="button" class="action-button ghost" data-close-finding-dialog="finding-dialog-6">Close</button>
+        </div>
+      </dialog>
+    </article></div>
+  </section>
+  <section class="section" data-section="customize" aria-labelledby="section-customize">
+    <div class="section-heading">
+      <div><span class="eyebrow">04 · Capability</span><h2 id="section-customize">Agent Customize</h2></div>
+      <p>Inspected project and authorized host surfaces.</p>
+    </div>
+    <div class="custom-grid"><article><span class="custom-mark">R</span><div><h3>Rules</h3><p>Project · 1</p></div></article><article><span class="custom-mark">S</span><div><h3>Skills</h3><p>Project · 1</p></div></article><article><span class="custom-mark">H</span><div><h3>Hooks</h3><p>Project · 1</p></div></article></div>
+  </section>
+  <section class="section" data-section="methodology" aria-labelledby="section-methodology">
+    <div class="section-heading">
+      <div><span class="eyebrow">05 · Boundary</span><h2 id="section-methodology">Evidence and methodology</h2></div>
+      <p>Reader-safe evidence only.</p>
+    </div>
+    <div class="evidence-grid"><div><span>Evidence mode</span><strong>—</strong></div><div><span>Task episodes</span><strong>0</strong></div><div><span>Edited episodes</span><strong>0</strong></div><div><span>Sampling</span><strong>N/A</strong></div><div><span>Confidence</span><strong>—</strong></div><div><span>Learning state</span><strong>—</strong></div></div>
+    
+    <p class="method-note">Activity totals describe volume, not quality or savings. Fluency conclusions come from the reviewed task sample and remain bounded by the retained evidence.</p>
+  </section>
+<footer>Generated from one reviewed Harness source · self-contained portable HTML</footer>
+</main>
+<dialog id="manual-copy-dialog" class="manual-copy-dialog" aria-labelledby="manual-copy-title" aria-describedby="manual-copy-description">
+  <div class="dialog-heading">
+    <div>
+      <span class="label">Manual fallback</span>
+      <h3 id="manual-copy-title">Copy the AI Fix prompt</h3>
+    </div>
+  </div>
+  <p id="manual-copy-description">Automatic copy was blocked. The exact prompt is selected below.</p>
+  <textarea id="manual-copy-text" readonly aria-label="AI Fix prompt"></textarea>
+  <div class="dialog-actions">
+    <button type="button" class="action-button ghost" data-close-finding-dialog="manual-copy-dialog">Close</button>
+  </div>
+</dialog>
+<script id="harness-report-data" type="application/json">{"findings":[{"id":"settings-permissions-schema","aiFixPrompt":"/better-harness fix this issue\n\nRewrite the 'permissions' block of .claude/settings.json in the Claude Code schema, keeping the same intent: allow Bash(npm run lint) and Bash(npm test); deny Read(./.env) and Read(./**/*.secret). Do not touch user or global settings.\n\n## Validation\n\n- Open /permissions in Claude Code and confirm the deny and allow rules appear as project rules\n- Confirm /doctor reports no validation errors for .claude/settings.json"},{"id":"settings-hook-schema","aiFixPrompt":"/better-harness fix this issue\n\nRewrite hooks.PostToolUse in .claude/settings.json as one entry with matcher 'Edit|Write' and a command-type hook. Until a package.json with a 'lint' script exists, the command must exit cleanly when that script is missing, or the hook stays disabled with a note explaining why. Do not create package.json in this fix.\n\n## Validation\n\n- Open /hooks in Claude Code and confirm a PostToolUse entry with matcher Edit|Write is listed\n- Edit a scratch file and confirm the hook runs without blocking the session"},{"id":"claude-md-agents-import","aiFixPrompt":"/better-harness fix this issue\n\nIn CLAUDE.md, replace the prose import sentence with an @AGENTS.md import line. Keep the two additional rules already there and do not duplicate AGENTS.md content.\n\n## Validation\n\n- Start a new session and run /memory to confirm AGENTS.md is listed as loaded\n- Without opening files, ask the agent for the lint command and confirm it answers npm run lint"},{"id":"agents-md-unrunnable-commands","aiFixPrompt":"/better-harness fix this issue\n\nIn AGENTS.md, mark the 'Comandos Principais' section as applying once the Next.js project is scaffolded. Add a current-phase rule: while no package.json exists, verifying a change to docs/specs or .claude means reviewing the diff and confirming it does not contradict the specs. Change 'npm test ou npm run lint' to require both npm run lint and npm test. Do not create package.json or scaffolding in this fix.\n\n## Validation\n\n- Read AGENTS.md and confirm every referenced command exists or is clearly marked as future\n- Confirm the completion rule requires both lint and tests"},{"id":"mobile-skill-routing","aiFixPrompt":"/better-harness fix this issue\n\nAdd YAML frontmatter to .claude/skills/verificar-mobile/SKILL.md with name: verificar-mobile and a description stating when to use it (creating or editing files in src/components/, or requests to check how it looks on a phone). Change step 3 to propose changes and wait for confirmation before rewriting. In CLAUDE.md, name the verificar-mobile Skill in the mobile-first rule.\n\n## Validation\n\n- Start a new session and confirm the Skill list shows the new description\n- Ask to check whether a component looks good on a phone and confirm the Skill is selected"},{"id":"no-product-session-evidence","aiFixPrompt":"/better-harness fix this issue\n\nAfter fixing settings.json and the AGENTS.md import, run at least two real Spec 001 tasks in this workspace with Claude Code (for example the form and the RN-01 to RN-04 validations), then rerun the Better Harness review to compare use of the verificar-mobile Skill and checks.\n\n## Validation\n\n- Confirm the new review finds at least two product-development Task Episodes\n- Confirm whether the verificar-mobile Skill and the Hook appear as used in those Episodes"}]}</script>
+<script id="harness-report-actions" type="application/json">{"reportRoute":".claude/better-harness/2026-10-03-review/report.html","findings":[{"id":"settings-permissions-schema","expectedRevision":0},{"id":"settings-hook-schema","expectedRevision":0},{"id":"claude-md-agents-import","expectedRevision":0},{"id":"agents-md-unrunnable-commands","expectedRevision":0},{"id":"mobile-skill-routing","expectedRevision":0},{"id":"no-product-session-evidence","expectedRevision":0}]}</script>
+<script id="harness-report-interactions">(function installHtmlReportInteractions({
+  document,
+  navigator,
+  location,
+  labels,
+  schedule = (callback, delay) => globalThis.setTimeout(callback, delay),
+}) {
+  document.documentElement.classList.remove("no-js");
+
+  function readJson(id) {
+    const element = document.getElementById(id);
+    if (!element) return { ok: false, value: null };
+    try {
+      return { ok: true, value: JSON.parse(element.textContent || "{}") };
+    } catch {
+      return { ok: false, value: null };
+    }
+  }
+
+  function hasOnlyKeys(value, keys) {
+    return value && typeof value === "object" && !Array.isArray(value)
+      && Object.keys(value).every((key) => keys.includes(key));
+  }
+
+  function safeReportRoute(value) {
+    if (typeof value !== "string" || value.length === 0 || value.includes("\\")) return false;
+    if (value.startsWith("/") || /^[A-Za-z]:/u.test(value)) return false;
+    const segments = value.split("/");
+    return segments.at(-1) === "report.html"
+      && segments.every((segment) => segment && segment !== "." && segment !== "..");
+  }
+
+  const reportDataState = readJson("harness-report-data");
+  const reportActionsState = readJson("harness-report-actions");
+  const prompts = new Map();
+  const actions = new Map();
+  let bindingMode = "invalid";
+  let reportRoute = null;
+
+  if (reportDataState.ok
+    && hasOnlyKeys(reportDataState.value, ["findings"])
+    && Array.isArray(reportDataState.value.findings)) {
+    let validPrompts = true;
+    for (const finding of reportDataState.value.findings) {
+      const id = String(finding?.id ?? "");
+      if (!hasOnlyKeys(finding, ["id", "aiFixPrompt"])
+        || !id
+        || typeof finding.aiFixPrompt !== "string"
+        || finding.aiFixPrompt.trim().length === 0
+        || prompts.has(id)) {
+        validPrompts = false;
+        break;
+      }
+      prompts.set(id, finding.aiFixPrompt);
+    }
+
+    const payload = reportActionsState.value;
+    if (validPrompts
+      && reportActionsState.ok
+      && hasOnlyKeys(payload, ["reportRoute", "findings"])
+      && Array.isArray(payload.findings)) {
+      let validActions = true;
+      for (const finding of payload.findings) {
+        const id = String(finding?.id ?? "");
+        if (!hasOnlyKeys(finding, ["id", "expectedRevision"])
+          || !id
+          || !Number.isInteger(finding.expectedRevision)
+          || finding.expectedRevision < 0
+          || actions.has(id)) {
+          validActions = false;
+          break;
+        }
+        actions.set(id, finding);
+      }
+      const sameIds = actions.size === prompts.size
+        && [...prompts.keys()].every((id) => actions.has(id));
+      if (validActions && payload.reportRoute === null && actions.size === 0) {
+        bindingMode = "empty";
+      } else if (validActions && safeReportRoute(payload.reportRoute) && sameIds) {
+        bindingMode = "bound";
+        reportRoute = payload.reportRoute;
+      }
+    }
+  }
+
+  function resolveBindingPaths() {
+    try {
+      const url = new URL(String(location?.href ?? ""));
+      if (url.protocol !== "file:") return null;
+      const pathname = decodeURIComponent(url.pathname);
+      const windowsDrive = /^\/[A-Za-z]:\//u.test(pathname);
+      const windowsUnc = Boolean(url.hostname);
+      const suffix = `/${reportRoute}`;
+      const comparablePath = windowsDrive || windowsUnc ? pathname.toLowerCase() : pathname;
+      const comparableSuffix = windowsDrive || windowsUnc ? suffix.toLowerCase() : suffix;
+      if (!comparablePath.endsWith(comparableSuffix)) return null;
+
+      const workspaceUrlPath = pathname.slice(0, pathname.length - suffix.length);
+      const reportDirectory = pathname.slice(0, pathname.lastIndexOf("/"));
+      const findingsUrlPath = `${reportDirectory}/findings.json`;
+      const toNativePath = (value) => {
+        if (windowsDrive) return value.slice(1).replace(/\//gu, "\\");
+        if (windowsUnc) {
+          const host = decodeURIComponent(url.hostname);
+          return `\\\\${host}${value.replace(/\//gu, "\\")}`;
+        }
+        return value || "/";
+      };
+      return {
+        workspacePath: toNativePath(workspaceUrlPath),
+        findingsPath: toNativePath(findingsUrlPath),
+      };
+    } catch {
+      return null;
+    }
+  }
+
+  function promptForFinding(findingId) {
+    if (bindingMode === "invalid") return null;
+    const id = String(findingId);
+    const prompt = prompts.get(id);
+    if (typeof prompt !== "string" || prompt.trim().length === 0) return null;
+    if (bindingMode === "empty") return prompt;
+    const paths = resolveBindingPaths();
+    if (!paths) return prompt;
+    const action = actions.get(id);
+    if (!action) return null;
+    const callback = {
+      contract: "better-harness-fix-output/v1",
+      workspacePath: paths.workspacePath,
+      findingsPath: paths.findingsPath,
+      findingId: id,
+      expectedRevision: action.expectedRevision,
+    };
+    return `${prompt}\n\n<better-harness-fix-output>\n${JSON.stringify(callback)}\n</better-harness-fix-output>`;
+  }
+
+  const status = document.getElementById("copy-status");
+  const manualDialog = document.getElementById("manual-copy-dialog");
+  const manualText = document.getElementById("manual-copy-text");
+  const dialogTriggers = new Map();
+
+  function report(message, state) {
+    if (!status) return;
+    status.textContent = message;
+    status.dataset.state = state;
+  }
+
+  function legacyCopy(prompt) {
+    const textarea = document.createElement("textarea");
+    textarea.value = prompt;
+    textarea.setAttribute("readonly", "");
+    textarea.style.position = "fixed";
+    textarea.style.opacity = "0";
+    document.body.append(textarea);
+    try {
+      textarea.select();
+      return document.execCommand("copy") === true;
+    } catch {
+      return false;
+    } finally {
+      textarea.remove();
+    }
+  }
+
+  function copied(trigger) {
+    report(labels.copySuccess, "success");
+    if (trigger) {
+      const originalLabel = trigger.textContent;
+      trigger.textContent = labels.copied;
+      schedule(() => {
+        trigger.textContent = originalLabel || labels.copy;
+      }, 1800);
+    }
+    return true;
+  }
+
+  async function copyFinding(findingId, trigger) {
+    const prompt = promptForFinding(findingId);
+    if (typeof prompt !== "string" || prompt.length === 0) {
+      report(labels.missingPrompt, "error");
+      return false;
+    }
+
+    try {
+      if (!navigator?.clipboard?.writeText) throw new Error("Clipboard API unavailable");
+      await navigator.clipboard.writeText(prompt);
+      return copied(trigger);
+    } catch {
+      if (legacyCopy(prompt)) return copied(trigger);
+    }
+
+    if (manualDialog && typeof manualDialog.showModal === "function") {
+      dialogTriggers.set(manualDialog.id, trigger);
+      if (!manualDialog.open) manualDialog.showModal();
+    }
+    if (manualText) {
+      manualText.value = prompt;
+      manualText.focus();
+      manualText.select();
+    }
+    report(labels.manualCopy, "error");
+    return false;
+  }
+
+  function openDialog(dialogId, trigger) {
+    const dialog = document.getElementById(dialogId);
+    if (!dialog || typeof dialog.showModal !== "function") return false;
+    dialogTriggers.set(dialogId, trigger);
+    dialog.showModal();
+    return true;
+  }
+
+  function closeDialog(dialogId) {
+    const dialog = document.getElementById(dialogId);
+    if (!dialog || !dialog.open || typeof dialog.close !== "function") return false;
+    dialog.close();
+    return true;
+  }
+
+  for (const trigger of document.querySelectorAll("[data-copy-finding]")) {
+    trigger.addEventListener("click", () => copyFinding(trigger.dataset.copyFinding, trigger));
+  }
+  for (const trigger of document.querySelectorAll("[data-view-finding-dialog]")) {
+    trigger.addEventListener("click", () => openDialog(trigger.dataset.viewFindingDialog, trigger));
+  }
+  for (const trigger of document.querySelectorAll("[data-close-finding-dialog]")) {
+    trigger.addEventListener("click", () => closeDialog(trigger.dataset.closeFindingDialog));
+  }
+  const interactiveDialogs = [
+    ...document.querySelectorAll("dialog[data-finding-dialog-id]"),
+    manualDialog,
+  ].filter(Boolean);
+  for (const dialog of interactiveDialogs) {
+    dialog.addEventListener("close", () => {
+      const trigger = dialogTriggers.get(dialog.id);
+      dialogTriggers.delete(dialog.id);
+      trigger?.focus();
+    });
+    dialog.addEventListener("click", (event) => {
+      if (event.target !== dialog) return;
+      const rect = dialog.getBoundingClientRect();
+      const outside = event.clientX < rect.left
+        || event.clientX > rect.right
+        || event.clientY < rect.top
+        || event.clientY > rect.bottom;
+      if (outside) closeDialog(dialog.id);
+    });
+  }
+
+  return { copyFinding, openDialog, closeDialog };
+})({document,navigator,location:globalThis.location,labels:{"copy":"Copy AI Fix","copied":"Copied","copySuccess":"Copied. Paste into your coding agent input.","manualCopy":"Automatic copy was blocked. Copy the selected prompt manually.","missingPrompt":"No AI Fix prompt is available for this finding."}});</script>
+</body>
+</html>

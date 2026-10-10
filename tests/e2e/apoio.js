@@ -28,3 +28,17 @@ export function contarPedidosAoAgente(page) {
   });
   return pedidos;
 }
+
+// O campo fica com contorno vermelho e a mensagem aparece logo abaixo dele.
+export async function esperarErroNoCampo(expect, campo, mensagem) {
+  await expect(campo).toHaveAttribute("aria-invalid", "true");
+  await expect(campo).toHaveAccessibleDescription(mensagem);
+  await expect(campo).toHaveCSS("border-top-color", /oklch\(0\.577 0\.245 27\.325\)|rgb\(220, 38, 38\)/); // red-600
+
+  const idErro = await campo.getAttribute("aria-describedby");
+  const textoErro = campo.page().locator(`#${idErro}`);
+  await expect(textoErro).toBeVisible();
+  const caixaCampo = await campo.boundingBox();
+  const caixaErro = await textoErro.boundingBox();
+  expect(caixaErro.y).toBeGreaterThanOrEqual(caixaCampo.y + caixaCampo.height);
+}

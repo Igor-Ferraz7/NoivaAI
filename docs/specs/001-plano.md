@@ -43,3 +43,10 @@
 - **Revisor:** Igor Sousa Ferraz Aragão, em 09/10/2026, antes de qualquer código.
 - **Perguntas que o agente fez antes de começar:** o que mostrar depois do sucesso (P-04), qual ferramenta de teste usar (P-02), IA real ou agente substituto (P-03) e se podia fazer o push no fim.
 - **Resultado:** plano aprovado sem mudanças. P-02, P-03 e P-04 ficaram como propostos, e o push foi autorizado para depois dos testes e do teste de clone limpo.
+
+## 5. Execução (09/10/2026)
+- T1 a T9 feitas na ordem do plano, cada uma com `npm run lint` e `npm test` verdes antes do commit.
+- **Fora do plano, um commit de harness:** `6394ce2`, lint que entende JSX e falha com avisos. O erro que o motivou está no diário.
+- **A T9 virou dois commits:** `67ea488` (ajustes do harness) e o commit do diário. Entrou também um commit só com as capturas de tela a 360 px (`30e8520`), para o vídeo.
+- **Diferenças em relação ao plano aprovado:** Next.js 15.5.27 em vez de 15.5.26, mais o `overrides` do PostCSS 8.5.29, por falhas de segurança apontadas pelo `npm audit`. O eslint-plugin-react 7.37.5 também foi adicionado.
+- **Verificação final:** clone limpo seguindo só o `AGENTS.md`, numa pasta de navegadores vazia, com `npm ci`, `npx playwright install chromium`, `npm run lint`, `npm test` (7 + 12 testes) e `npm run dev` funcionando.

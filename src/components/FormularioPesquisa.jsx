@@ -3,9 +3,12 @@
 // Formulário da pesquisa inicial de fornecedores (Spec 001).
 import { useState } from "react";
 import BotaoPrincipal from "./BotaoPrincipal.jsx";
-import { CATEGORIAS, validarPesquisa } from "../lib/pesquisa.js";
+import { CATEGORIAS, MENSAGENS, validarPesquisa } from "../lib/pesquisa.js";
 
 const VAZIO = { cidadeUf: "", data: "", categoria: "", orcamento: "", convidados: "" };
+
+// Decisão provisória D-10 da spec: até a Spec 002 trazer a lista de fornecedores.
+const MENSAGEM_RECEBIDO = "Recebemos o seu pedido. A lista de fornecedores chega em breve.";
 
 const estiloBase =
   "block w-full min-w-0 min-h-12 rounded-xl border bg-white px-3 py-2 text-base focus:outline-none focus-visible:ring-2";
@@ -40,6 +43,7 @@ function Campo({ id, rotulo, ajuda, erro, children }) {
 
 export default function FormularioPesquisa() {
   const [valores, setValores] = useState(VAZIO);
+  const [etapa, setEtapa] = useState("formulario"); // formulario | carregando | recebido
   const { erros, valido } = validarPesquisa(valores);
 
   const alterar = (campo) => (evento) => setValores((atuais) => ({ ...atuais, [campo]: evento.target.value }));
@@ -53,9 +57,38 @@ export default function FormularioPesquisa() {
     ...ligacaoErro(campo, erros[campo]),
   });
 
-  function enviar(evento) {
+  async function enviar(evento) {
     evento.preventDefault();
-    if (!valido) return; // RN-04: nada é enviado com dados em falta ou inválidos.
+    if (!valido || etapa !== "formulario") return; // RN-04: nada é enviado com dados em falta ou inválidos.
+
+    setEtapa("carregando");
+    try {
+      const resposta = await fetch("/api/pesquisa", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(valores),
+      });
+      setEtapa(resposta.ok ? "recebido" : "formulario");
+    } catch {
+      setEtapa("formulario");
+    }
+  }
+
+  if (etapa === "carregando") {
+    return (
+      <div role="status" aria-live="polite" className="mt-10 flex flex-col items-center gap-4 text-center">
+        <span aria-hidden="true" className="size-10 animate-spin rounded-full border-4 border-rose-200 border-t-rose-600" />
+        <p className="text-lg font-medium text-rose-700">{MENSAGENS.carregando}</p>
+      </div>
+    );
+  }
+
+  if (etapa === "recebido") {
+    return (
+      <div role="status" aria-live="polite" className="mt-10 rounded-xl bg-white p-4 text-center text-lg font-medium text-rose-700">
+        {MENSAGEM_RECEBIDO}
+      </div>
+    );
   }
 
   return (

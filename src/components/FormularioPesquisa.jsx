@@ -3,7 +3,7 @@
 // Formulário da pesquisa inicial de fornecedores (Spec 001).
 import { useState } from "react";
 import BotaoPrincipal from "./BotaoPrincipal.jsx";
-import { CATEGORIAS, MENSAGENS, validarPesquisa } from "../lib/pesquisa.js";
+import { CATEGORIAS, MENSAGENS, TEMPO_LIMITE_AGENTE_MS, validarPesquisa } from "../lib/pesquisa.js";
 
 const VAZIO = { cidadeUf: "", data: "", categoria: "", orcamento: "", convidados: "" };
 
@@ -44,6 +44,7 @@ function Campo({ id, rotulo, ajuda, erro, children }) {
 export default function FormularioPesquisa() {
   const [valores, setValores] = useState(VAZIO);
   const [etapa, setEtapa] = useState("formulario"); // formulario | carregando | recebido
+  const [agenteFalhou, setAgenteFalhou] = useState(false);
   const { erros, valido } = validarPesquisa(valores);
 
   const alterar = (campo) => (evento) => setValores((atuais) => ({ ...atuais, [campo]: evento.target.value }));
@@ -62,15 +63,25 @@ export default function FormularioPesquisa() {
     if (!valido || etapa !== "formulario") return; // RN-04: nada é enviado com dados em falta ou inválidos.
 
     setEtapa("carregando");
+    setAgenteFalhou(false);
+    // RN-06: sem resposta em 60 s, o pedido é cancelado e conta como falha.
+    const controlo = new AbortController();
+    const limite = setTimeout(() => controlo.abort(), TEMPO_LIMITE_AGENTE_MS);
     try {
       const resposta = await fetch("/api/pesquisa", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(valores),
+        signal: controlo.signal,
       });
-      setEtapa(resposta.ok ? "recebido" : "formulario");
+      if (!resposta.ok) throw new Error(`O agente respondeu ${resposta.status}`);
+      setEtapa("recebido");
     } catch {
+      // RN-06: volta o formulário com os mesmos dados (valores não foi limpo).
+      setAgenteFalhou(true);
       setEtapa("formulario");
+    } finally {
+      clearTimeout(limite);
     }
   }
 
@@ -93,6 +104,12 @@ export default function FormularioPesquisa() {
 
   return (
     <form onSubmit={enviar} noValidate aria-label="Pesquisa de fornecedores" className="mt-6 flex flex-col gap-5">
+      {agenteFalhou && (
+        <p role="alert" className="rounded-xl border-2 border-red-600 bg-red-50 p-3 font-medium text-red-700">
+          {MENSAGENS.falhaAgente}
+        </p>
+      )}
+
       <Campo id="cidadeUf" rotulo="Cidade/UF" ajuda="Exemplo: Rio Verde - GO" erro={erros.cidadeUf}>
         <input type="text" autoComplete="address-level2" {...ligar("cidadeUf")} />
       </Campo>

@@ -1,3 +1,5 @@
+import FormularioPesquisa from "../components/FormularioPesquisa.jsx";
+
 // Página de pesquisa de fornecedores (Spec 001). Mobile-first: é aberta no
 // telemóvel a partir de links do Instagram e do TikTok.
 export default function Home() {
@@ -7,6 +9,7 @@ export default function Home() {
       <p className="mt-2 text-gray-700">
         Diga-nos a cidade, o tipo de fornecedor e quanto quer gastar. A nossa IA faz a pesquisa por si.
       </p>
+      <FormularioPesquisa />
     </main>
   );
 }

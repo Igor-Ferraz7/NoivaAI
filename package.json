@@ -3,10 +3,24 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
     "lint": "eslint . --no-error-on-unmatched-pattern",
     "test": "node --test"
   },
   "devDependencies": {
-    "eslint": "^9.0.0"
+    "@tailwindcss/postcss": "4.3.3",
+    "eslint": "9.39.5",
+    "tailwindcss": "4.3.3"
+  },
+  "dependencies": {
+    "next": "15.5.27",
+    "react": "19.3.0",
+    "react-dom": "19.3.0"
+  },
+  "type": "module",
+  "overrides": {
+    "postcss": "8.5.29"
   }
 }

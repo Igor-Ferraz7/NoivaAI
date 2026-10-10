@@ -3,23 +3,28 @@
 Este documento define como os agentes de IA devem operar no repositório do Noiva.AI.
 
 ## Stack Técnica
-- Node.js 20 LTS ou superior (npm 10+).
-- ESLint 9.x (instalado; configuração em `eslint.config.mjs`).
-- Testes: executor nativo do Node (`node --test`), sem dependências extra.
-- Planeado, ainda não instalado: Next.js 15 + React 19 + Tailwind CSS 4; Supabase (PostgreSQL); API da OpenAI/Gemini. Quando forem instalados, atualizar esta secção com as versões do `package.json`.
+- Node.js 20 LTS ou superior (npm 10+). Testado com Node 22.12 e npm 10.9.
+- Next.js 15.5.27 (App Router) + React 19.3.0 + Tailwind CSS 4.3.3, versões exatas no `package.json`. O `overrides` força o PostCSS 8.5.29 porque o Next 15 traz uma versão com falhas de segurança conhecidas.
+- ESLint 9.39.5 (configuração em `eslint.config.mjs`).
+- Testes: executor nativo do Node (`node --test`) para as regras puras.
+- Planeado, ainda não instalado: Supabase (PostgreSQL); API da OpenAI/Gemini (Spec 002). Na Spec 001 o agente é um substituto em `src/lib/agente.js`.
 - Servidores MCP: nenhum instalado. Qualquer MCP adicionado tem de vir de fonte conhecida e ser listado aqui.
 
 ## Comandos Reais
-- Instalar dependências: `npm install`
-- Rodar o lint: `npm run lint`
-- Rodar os testes: `npm test`
-- Ainda não existe `npm run dev`: só passa a existir quando o Next.js for instalado.
+Num clone limpo, por esta ordem:
+1. Instalar dependências exatamente como no `package-lock.json`: `npm ci` (para adicionar um pacote novo: `npm install --save-exact <pacote>@<versão>`)
+2. Rodar em desenvolvimento: `npm run dev` e abrir http://localhost:3000
+3. Gerar a versão de produção: `npm run build` e depois `npm run start`
+4. Rodar o lint: `npm run lint`
+5. Rodar os testes: `npm test`
 
 ## Estrutura de Pastas
 - `docs/specs/`: especificações das features (ex.: `001-pesquisa-fornecedores.md`).
 - `docs/harness/`: relatórios do Better Harness e evidências do harness.
 - `src/components/`: componentes visuais.
-- `src/app/`: páginas do sistema (quando o Next.js for instalado).
+- `src/app/`: páginas e rotas de API do Next.js (App Router).
+- `src/lib/`: regras de negócio sem interface (validação, agente).
+- `tests/unit/`: testes das regras puras (`node --test`).
 
 ## Como deves trabalhar (Princípios)
 1. **Lê as specs antes de codificar:** nunca adivinhes regras de negócio. Vai a `docs/specs/` ler.

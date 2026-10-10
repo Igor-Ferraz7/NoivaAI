@@ -22,10 +22,10 @@ Permitir que os noivos informem cidade, categoria de fornecedor, orçamento máx
 ## 4. Dados
 | Campo | Tipo | Obrigatório |
 | :--- | :--- | :--- |
-| Cidade/UF | Texto no formato "Cidade - UF", com UF de 2 letras de uma das 27 unidades federativas | Sim |
-| Data prevista | Data (DD/MM/AAAA) | Não |
+| Cidade/UF | Texto no formato "Cidade - UF", com UF de 2 letras de uma das 27 unidades federativas (espaços à volta do hífen são opcionais e a UF pode vir em minúsculas, ver D-11) | Sim |
+| Data prevista | Data (DD/MM/AAAA), escolhida no calendário do telemóvel (ver D-13) | Não |
 | Categoria de fornecedor | Seleção única entre: Espaço, Buffet, Fotografia, Filmagem, Decoração, Música/DJ, Vestido/Traje, Cerimonial | Sim |
-| Orçamento máximo para a categoria | Valor em reais (R$), com até 2 casas decimais, que os noivos aceitam gastar **só com o fornecedor da categoria escolhida** (não é o orçamento do casamento inteiro) | Sim |
+| Orçamento máximo para a categoria | Valor em reais (R$), com até 2 casas decimais, que os noivos aceitam gastar **só com o fornecedor da categoria escolhida** (não é o orçamento do casamento inteiro). Aceita "15000", "15.000", "15.000,50" e "0,01" (ver D-12) | Sim |
 | Número estimado de convidados | Número inteiro | Sim |
 
 ## 5. Regras de Negócio
@@ -35,6 +35,7 @@ Permitir que os noivos informem cidade, categoria de fornecedor, orçamento máx
 - **RN-04:** O botão "Encontrar Fornecedores" só fica ativo quando os quatro campos obrigatórios estão preenchidos e nenhum campo viola RN-01, RN-02, RN-03 ou RN-05.
 - **RN-05:** A UF informada deve ser uma das 27 siglas oficiais (AC, AL, AP, AM, BA, CE, DF, ES, GO, MA, MT, MS, MG, PA, PB, PR, PE, PI, RJ, RN, RS, RO, RR, SC, SP, SE, TO).
 - **RN-06:** Se o agente devolver erro ou não responder em 60 segundos, o sistema volta a exibir o formulário com os dados já preenchidos e a mensagem "Não conseguimos procurar fornecedores agora. Tente novamente.".
+- **RN-07 (provisória, até à Spec 002):** Se o agente confirmar que recebeu o pedido, o ecrã troca o indicador de carregamento pela mensagem "Recebemos o seu pedido. A lista de fornecedores chega em breve." (ver D-10).
 
 **Mensagens de erro por regra** (exibidas abaixo do campo, que fica com contorno vermelho):
 
@@ -42,8 +43,8 @@ Permitir que os noivos informem cidade, categoria de fornecedor, orçamento máx
 | :--- | :--- |
 | RN-01 | "A data não pode estar no passado" |
 | RN-02 | "O número de convidados deve ser maior que zero" |
-| RN-03 | "O orçamento deve ser maior que R$ 0,00" |
-| RN-05 | "UF inválida. Use a sigla de 2 letras do estado" |
+| RN-03 | "O orçamento deve ser maior que R$ 0,00" (também para um valor que não seja um número em reais com até 2 casas, ver D-12) |
+| RN-05 | "UF inválida. Use a sigla de 2 letras do estado" (também para um texto sem " - UF" no fim, ver D-11) |
 
 ## 6. Tabela de Exemplos (RN-04, a regra mais importante)
 | Cenário | Cidade/UF | Categoria | Convidados | Orçamento da categoria | Data Prevista | Resultado Esperado |
@@ -137,6 +138,27 @@ Permitir que os noivos informem cidade, categoria de fornecedor, orçamento máx
 **D-09 – Critérios de aceite incompletos** *(apontado na revisão cruzada)*
 - **Lacuna:** os critérios não testavam orçamento zero, UF inválida, a restrição de 360 px nem a falha da IA; a feature podia "passar" com essas partes quebradas.
 - **Decisão:** novos critérios CA-04 a CA-07, um para cada lacuna.
+
+### Atualização depois da implementação (09/10/2026, plano [`001-plano.md`](001-plano.md))
+A implementação seguiu as regras RN-01 a RN-06 e os critérios CA-01 a CA-07 sem mudar nenhum deles. Teve, porém, de decidir quatro pontos que a spec deixava em aberto:
+
+**D-10 – O que aparece quando o agente responde bem?** *(plano, P-04)*
+- **Lacuna:** a spec manda mostrar o indicador de carregamento, mas a resposta do agente é a Spec 002. Sem uma regra, o indicador ficava no ecrã para sempre.
+- **Decisão:** nova RN-07, provisória: com a confirmação do agente aparece "Recebemos o seu pedido. A lista de fornecedores chega em breve.".
+- **Validade:** até à Spec 002 trocar esta mensagem pela lista de fornecedores.
+
+**D-11 – Cidade/UF escrita de formas diferentes** *(plano, P-07)*
+- **Lacuna:** a spec dizia "Cidade - UF", mas não dizia o que fazer com "Rio Verde-GO", "rio verde - go" ou "Rio Verde" sem UF.
+- **Decisão:** os espaços à volta do hífen são opcionais e a UF é convertida para maiúsculas. Um texto que não acabe em " - UF" mostra a mensagem da RN-05.
+- **Motivo:** quem escreve no telemóvel com pressa não deve ser recusado por um espaço; e a mensagem da RN-05 já explica o que falta.
+
+**D-12 – Orçamento escrito fora do formato** *(plano, P-08)*
+- **Lacuna:** "até 2 casas decimais" não tinha mensagem quando a regra era violada, nem dizia se "15.000" é quinze mil.
+- **Decisão:** aceitar "15000", "15.000" (quinze mil), "15.000,50" e "0,01". Letras ou mais de 2 casas mostram a mensagem da RN-03.
+
+**D-13 – Calendário nativo para a data** *(plano, P-05)*
+- **Decisão:** o campo de data usa o calendário do próprio telemóvel ou navegador, que só deixa escolher datas que existem e as mostra como DD/MM/AAAA. Por isso não há mensagem para "data mal escrita".
+- **No servidor:** a RN-01 usa a data de Rio Branco (UTC-5), o fuso mais a oeste do Brasil, para que o servidor, que está em UTC, não recuse o "hoje" de quem está no Brasil.
 
 **Pergunta de validação:** se o código fosse apagado agora, esta spec seria suficiente para reconstruí-lo?
 **Resposta:** sim, para o formulário. Campos, formatos, lista de categorias, regras de validação, mensagens e reações do ecrã estão descritos sem depender de tecnologia. O que esta spec não cobre, de propósito, é a lista de fornecedores devolvida pelo agente quando a pesquisa dá certo: isso fica para a Spec 002.
